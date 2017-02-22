@@ -15,6 +15,7 @@ namespace PostTracks
     {
         public Form1()
         {
+            // TRACK24
             //'error' : 'TooManyRequests'
             //В данный момент, стандартный лимит : 
             //10 запросов / сек (600 запросов / мин), 
@@ -22,9 +23,14 @@ namespace PostTracks
             //трек-код в формате AZ#########AZ
 
             InitializeComponent();
-            Track24 tr24 = new Track24("RF499423428CN"); //RB166350968SG
+            //Track24 tr24 = new Track24("RF499423428CN"); //RB166350968SG
 
-            MessageBox.Show(tr24.ToString());
+            //MessageBox.Show(tr24.ToString());
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            richTextBox1.Text = new Track24(textBox1.Text).ToString();
         }
     }
     

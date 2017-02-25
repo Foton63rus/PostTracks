@@ -11,7 +11,7 @@ using Newtonsoft.Json.Linq;
 
 namespace PostTracks
 {
-    public class Track24
+    public class Track24 : IPostTrackInfo
     {
         //'error' : 'TooManyRequests'
         //В данный момент, стандартный лимит : 
@@ -22,7 +22,7 @@ namespace PostTracks
         private string domain = "excel.vba.demo";
         private string TrackCode = "";
         Random rnd = new Random();
-        string json;
+        internal string json;
         string operationAttribute { get; set; } = "";
         string operationPlaceName { get; set; } = "";
         string eventDateTime { get; set; } = "";
@@ -39,6 +39,14 @@ namespace PostTracks
             string NEW_LINE = Environment.NewLine;
             return operationAttribute + NEW_LINE + operationPlaceName + NEW_LINE + eventDateTime + NEW_LINE + destinationCountry + NEW_LINE + trackCodeModified + NEW_LINE + trackDeliveredDateTime + NEW_LINE + itemWeight + NEW_LINE + groupedCompanyNames;
         }
+
+        List<string> IPostTrackInfo.getTrackInfoForExcel()
+        {
+            return new List<string>(){  TrackCode, operationAttribute, operationPlaceName, eventDateTime,
+                                        destinationCountry, trackCodeModified, trackDeliveredDateTime,
+                                        itemWeight, groupedCompanyNames };
+        }
+
         public Track24(string currentTrackCode)
         {
             TrackCode = currentTrackCode;
@@ -72,11 +80,12 @@ namespace PostTracks
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message + 
+                /*MessageBox.Show(e.Message + 
                                 Environment.NewLine +
                                 " class Track24 => Ошибка создания объекта "+
                                 Environment.NewLine +
                                 " Возможные причины => неверный запрос трека, глючный парсинг json ответа с сервера, нашествие инопланетян");
+                */
             }
 
         }

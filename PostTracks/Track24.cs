@@ -23,14 +23,14 @@ namespace PostTracks
         private string TrackCode = "";
         Random rnd = new Random();
         internal string json;
-        string operationAttribute { get; set; } = "";
-        string operationPlaceName { get; set; } = "";
-        string eventDateTime { get; set; } = "";
-        string destinationCountry { get; set; } = "";
-        string trackCodeModified { get; set; } = "";
-        string trackDeliveredDateTime { get; set; } = "";
-        string itemWeight { get; set; } = "";
-        string groupedCompanyNames { get; set; } = "";
+        string operationAttribute { get; set; }
+        string operationPlaceName { get; set; }
+        string eventDateTime { get; set; }
+        string destinationCountry { get; set; }
+        string trackCodeModified { get; set; }
+        string trackDeliveredDateTime { get; set; }
+        string itemWeight { get; set; }
+        string groupedCompanyNames { get; set; }
 
         //string fromCountry { get; set; } = "";
 

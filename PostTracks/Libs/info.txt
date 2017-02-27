@@ -1,0 +1,9 @@
+﻿В данной папке находятся сторонние библеотеки
+
+1. Microsoft.Office.Interop.Excel.dll
+https://www.microsoft.com/en-us/download/details.aspx?id=3508 (ссылка на 2010-ю версию)
+Взято из пакета MS Office 2013
+
+2. Newtonsoft.Json.dll
+http://www.newtonsoft.com/json
+https://github.com/JamesNK/Newtonsoft.Json

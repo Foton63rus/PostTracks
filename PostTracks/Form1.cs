@@ -25,8 +25,10 @@ namespace PostTracks
             //трек-код в формате AZ#########AZ
 
             InitializeComponent();
-            excel = new ExcelIO("");
-            excel.track24dataToExcel();
+            Tracker_track24.getSingleTrackInfo("RB166350968SG");
+            //excel = new ExcelIO("");
+            //excel.track24dataToExcel();
+
             //
             //excel.postDataToExcel( (IPostTrackInfo) );
             //excel.ExcelAppQuit();
@@ -42,8 +44,7 @@ namespace PostTracks
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            excel.ExcelAppQuit();
+            if(excel != null) { excel.ExcelAppQuit(); }
         }
     }
-    
 }

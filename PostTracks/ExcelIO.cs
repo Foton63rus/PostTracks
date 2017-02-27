@@ -90,7 +90,7 @@ namespace PostTracks
 
         }
         public void ExcelAppQuit() {
-            ExcelApp.Quit();
+            if (ExcelApp != null) ExcelApp.Quit();
         }
         public ExcelIO(string str_path)
         {

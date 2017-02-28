@@ -7,3 +7,6 @@ https://www.microsoft.com/en-us/download/details.aspx?id=3508 (ссылка на
 2. Newtonsoft.Json.dll
 http://www.newtonsoft.com/json
 https://github.com/JamesNK/Newtonsoft.Json
+
+3. Надо добавить логи
+https://github.com/NLog

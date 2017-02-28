@@ -26,8 +26,9 @@ namespace PostTracks
 
             InitializeComponent();
             Tracker_track24.getSingleTrackInfo("RB166350968SG");
-            //excel = new ExcelIO("");
-            //excel.track24dataToExcel();
+
+            excel = new ExcelIO("");
+            excel.track24dataToExcel();
 
             //
             //excel.postDataToExcel( (IPostTrackInfo) );

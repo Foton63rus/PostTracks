@@ -36,7 +36,7 @@ namespace PostTracks
             //пытаемся получить json ответ в новом потоке
             try
             {
-                Task t = Task.Run( () => {
+                //Task t = Task.Run( () => {
                     using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
                     {
                         using (StreamReader reader = new StreamReader(response.GetResponseStream()))
@@ -67,15 +67,15 @@ namespace PostTracks
                             TrackCodeInfoDictionary[TrackCode] = tmpDict;
                         }
                     }
-                });
-                t.Wait();
+                //});
+                //t.Wait();
             }
             catch (Exception e)
             {
                 //MessageBox.Show(e.Message);
             }
         }// \public static void getSingleTrackInfo(string TrackCode)
-        public static void getManyTrackInfo(List<string> trackList)
+        public static Dictionary<string, Dictionary<string, string>> getManyTrackInfo(List<string> trackList)
         {
             foreach (string track in trackList)
             {
@@ -83,9 +83,10 @@ namespace PostTracks
 
                 Thread.Sleep(100); //ограничение 10 треков в сек
             }
+            return TrackCodeInfoDictionary;
         }
         public static Dictionary<string, Dictionary<string, string>> getTrackInfoDictionary()
-        {// для передачи всей инфы по трекам в эксель
+        {// для передачи всей инфы по трекам в эксель без обновления информации о трек-кодах
             return TrackCodeInfoDictionary;
         }
 

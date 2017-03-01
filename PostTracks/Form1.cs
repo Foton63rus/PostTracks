@@ -25,9 +25,10 @@ namespace PostTracks
             //трек-код в формате AZ#########AZ
 
             InitializeComponent();
-            Tracker_track24.getSingleTrackInfo("RB166350968SG");
+            //Tracker_track24.getSingleTrackInfo("RB166350968SG");
 
             excel = new ExcelIO("");
+            Tracker_track24.getManyTrackInfo(excel.LoadedTracks);
             excel.track24dataToExcel();
 
             //

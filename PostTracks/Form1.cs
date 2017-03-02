@@ -29,7 +29,8 @@ namespace PostTracks
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            richTextBox1.Text = new Track24(textBox1.Text).ToString();
+            Tracker_track24.getSingleTrackInfo(textBox1.Text);
+            richTextBox1.Text = Tracker_track24.getTrackJSON(textBox1.Text);
         }
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)

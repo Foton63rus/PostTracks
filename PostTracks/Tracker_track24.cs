@@ -33,42 +33,49 @@ namespace PostTracks
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(cUrl);
             request.Method = "GET";
             request.Accept = "application/json";
-            //пытаемся получить json ответ в новом потоке
+            //
+            if(!System.IO.Directory.Exists(System.IO.Directory.GetCurrentDirectory() + @"\json\"))
+            {
+                System.IO.Directory.CreateDirectory(System.IO.Directory.GetCurrentDirectory() + @"\json\");
+            }
+            
+            //пытаемся получить json ответ
             try
             {
-                //Task t = Task.Run( () => {
-                    using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                {
+                    using (StreamReader reader = new StreamReader(response.GetResponseStream()))
                     {
-                        using (StreamReader reader = new StreamReader(response.GetResponseStream()))
+                        StringBuilder json_sb = (new StringBuilder()).Append(reader.ReadToEnd());
+                        string json = json_sb.ToString();
+                        if (jsonResponses.ContainsKey(TrackCode))
                         {
-                            StringBuilder json_sb = (new StringBuilder()).Append(reader.ReadToEnd());
-                            string json = json_sb.ToString();
-                            if (jsonResponses.ContainsKey(TrackCode))
-                            {
-                                jsonResponses[TrackCode] = json;
-                            }
-                            else
-                            {
-                                jsonResponses.Add(TrackCode, json);
-                            }
-                            //parsing
-                            JObject jObject = JObject.Parse(json);
-                            Dictionary<string, string> tmpDict = new Dictionary<string, string>();
-                            tmpDict.Add("operationAttribute", jObject["data"]["lastPoint"]["operationAttribute"].ToString());
-                            tmpDict.Add("operationPlaceName", jObject["data"]["lastPoint"]["operationPlaceName"].ToString());
-                            tmpDict.Add("eventDateTime", jObject["data"]["lastPoint"]["eventDateTime"].ToString());
-                            tmpDict.Add("destinationCountry", jObject["data"]["destinationCountry"].ToString());
-                            tmpDict.Add("trackCodeModified", jObject["data"]["trackCodeModified"].ToString());
-                            tmpDict.Add("trackDeliveredDateTime", jObject["data"]["trackDeliveredDateTime"].ToString());
-                            tmpDict.Add("itemWeight", jObject["data"]["lastPoint"]["itemWeight"].ToString());
-                            tmpDict.Add("groupedCompanyNames", jObject["data"]["groupedCompanyNames"][0].ToString());
-
-                            if (!TrackCodeInfoDictionary.ContainsKey(TrackCode)) TrackCodeInfoDictionary.Add(TrackCode, new Dictionary<string, string>());
-                            TrackCodeInfoDictionary[TrackCode] = tmpDict;
+                            jsonResponses[TrackCode] = json;
                         }
+                        else
+                        {
+                            jsonResponses.Add(TrackCode, json);
+                        }
+
+                        //сохраняем json чисто для лога (в последствии можно будет стереть)
+                        System.IO.File.WriteAllText(System.IO.Directory.GetCurrentDirectory()+@"\json\"+ TrackCode.ToString()+ ".json", json);
+
+                        //parsing
+                        JObject jObject = JObject.Parse(json);
+                        Dictionary<string, string> tmpDict = new Dictionary<string, string>();
+                        tmpDict.Add("operationAttribute", jObject["data"]["lastPoint"]["operationAttribute"].ToString());
+                        tmpDict.Add("operationPlaceName", jObject["data"]["lastPoint"]["operationPlaceName"].ToString());
+                        tmpDict.Add("eventDateTime", jObject["data"]["lastPoint"]["eventDateTime"].ToString());
+                        tmpDict.Add("destinationCountry", jObject["data"]["destinationCountry"].ToString());
+                        tmpDict.Add("trackCodeModified", jObject["data"]["trackCodeModified"].ToString());
+                        tmpDict.Add("trackDeliveredDateTime", jObject["data"]["trackDeliveredDateTime"].ToString());
+                        tmpDict.Add("itemWeight", jObject["data"]["lastPoint"]["itemWeight"].ToString());
+                        tmpDict.Add("groupedCompanyNames", jObject["data"]["groupedCompanyNames"][0].ToString());
+
+                        if (!TrackCodeInfoDictionary.ContainsKey(TrackCode)) TrackCodeInfoDictionary.Add(TrackCode, new Dictionary<string, string>());
+                        TrackCodeInfoDictionary[TrackCode] = tmpDict;
                     }
-                //});
-                //t.Wait();
+                }
             }
             catch (Exception e)
             {
@@ -79,9 +86,11 @@ namespace PostTracks
         {
             foreach (string track in trackList)
             {
-                getSingleTrackInfo(track);
-
-                Thread.Sleep(100); //ограничение 10 треков в сек
+                Task t = Task.Run(() => {
+                    getSingleTrackInfo(track);
+                });
+                t.Wait();
+                //Thread.Sleep(100); //ограничение 10 треков в сек
             }
             return TrackCodeInfoDictionary;
         }

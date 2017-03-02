@@ -13,7 +13,7 @@ namespace PostTracks
 {
     public partial class Form1 : Form
     {
-        ExcelIO excel;
+        ExcelIO xl = ExcelIO.getInstance();
         public Form1()
         {
             //https://www.aftership.com/docs/api/4/overview
@@ -23,10 +23,8 @@ namespace PostTracks
             InitializeComponent();
 
             //Tracker_track24.getSingleTrackInfo("RB166350968SG"); //"RF499423428CN"
-            excel = new ExcelIO("");
-            Tracker_track24.getManyTrackInfo(excel.LoadedTracks);
-            excel.track24dataToExcel();
-
+            //excel = ExcelIO.getInstance();
+            
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -36,7 +34,17 @@ namespace PostTracks
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if(excel != null) { excel.ExcelAppQuit(); }
+            if(xl != null) { xl.ExcelAppQuit(); }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            loadTrackListInfo(xl);
+        }
+        private void loadTrackListInfo(ExcelIO _excel)
+        {
+            Tracker_track24.getManyTrackInfo(_excel.LoadedTracks);
+            _excel.track24dataToExcel();
         }
     }
 }

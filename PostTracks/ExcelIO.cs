@@ -8,9 +8,15 @@ using System.Windows.Forms;
 
 namespace PostTracks
 {
-    public class ExcelIO
+    public sealed class ExcelIO //Singleton
     {
         //IPostTrackInfo
+        private ExcelIO() { loadWorkBook("");  }
+        private static ExcelIO instance = new ExcelIO();
+        public static ExcelIO getInstance()
+        {
+            return instance;
+        }
         internal Excel.Application ExcelApp;
         internal Excel.Workbook ExcelWB;
         internal Excel.Worksheet ExcelSheet;
@@ -46,31 +52,15 @@ namespace PostTracks
                     //range.Select();
                     foreach (var ws in range)
                     {
-                        LoadedTracks.Add(((Excel.Range)ws).Value);
+                        LoadedTracks.Add(((Excel.Range)ws).Value.ToString());
                     }
                 }
-                ExcelApp.Visible = true;
             }
             catch (Exception e)
             {
                 System.Windows.Forms.MessageBox.Show(e.Message);
             }
         }
-       /* public void track24dataToExcel()
-        {
-            ExcelWB.Sheets["Track24"].Activate();
-            ExcelWB.Sheets["Track24"].Select();
-            for (int i = 0; i< LoadedTracks.Count; i++)
-            {
-                Track24 tr24 = new Track24(LoadedTracks[i]);
-                str_CurrentTrackInfo = ((IPostTrackInfo)tr24).getTrackInfoForExcel();
-                for (int j = 0; j < str_CurrentTrackInfo.Count; j++)
-                {
-                    ExcelWB.Sheets["Track24"].Range["B2"].Offset[i, j].Value = str_CurrentTrackInfo[j];
-                    //ExcelWB.Sheets["Track24"].Cells[i+2, j+1].Value = str_CurrentTrackInfo[j];
-                }   
-            }
-        }*/
         public void track24dataToExcel()
         {
             Dictionary<string, Dictionary<string, string>> tmpDict = Tracker_track24.getTrackInfoDictionary();
@@ -91,6 +81,7 @@ namespace PostTracks
                 ExcelWB.Sheets["Track24"].Cells[i + 1, 9].Value = tmpDict[key]["itemWeight"];
                 ExcelWB.Sheets["Track24"].Cells[i + 1, 10].Value = tmpDict[key]["groupedCompanyNames"];
             }
+            ExcelApp.Visible = true;
         }
         public void ExcelAppQuit() {
             if (ExcelApp != null) ExcelApp.Quit();
@@ -98,7 +89,6 @@ namespace PostTracks
         public ExcelIO(string str_path)
         {
             loadWorkBook(str_path);
-            //postDataToExcel(IPostTrackInfo postTrackInfo);
         }
     }
 }

@@ -14,6 +14,7 @@ namespace PostTracks
         [STAThread]
         static void Main()
         {
+            ExcelIO ex;
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());

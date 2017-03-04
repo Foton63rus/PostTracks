@@ -29,7 +29,7 @@ namespace PostTracks
         public static void getSingleTrackInfo(string TrackCode)
         {
             //отправляем get запрос на track24.ru
-            string cUrl = @"https://track24.ru/api/tracking.json.php?apiKey=" + apiKey + "&domain=" + domain + "&code=" + TrackCode.ToUpper() + "&rnd=" + (new Random()).Next(10000, 99999).ToString();
+            string cUrl = @"https://track24.ru/api/tracking.json.php?apiKey=" + apiKey + "&domain=" + domain + "&code=" + TrackCode + "&rnd=" + (new Random()).Next(10000, 99999).ToString();
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(cUrl);
             request.Method = "GET";
             request.Accept = "application/json";
@@ -63,13 +63,25 @@ namespace PostTracks
                         //parsing
                         JObject jObject = JObject.Parse(json);
                         Dictionary<string, string> tmpDict = new Dictionary<string, string>();
-                        tmpDict.Add("operationAttribute", jObject["data"]["lastPoint"]["operationAttribute"].ToString());
-                        tmpDict.Add("operationPlaceName", jObject["data"]["lastPoint"]["operationPlaceName"].ToString());
-                        tmpDict.Add("eventDateTime", jObject["data"]["lastPoint"]["eventDateTime"].ToString());
+                        if (jObject["data"]["lastPoint"].ToString() == "")
+                        {
+                            tmpDict.Add("operationAttribute", jObject["data"]["events"][0]["operationAttribute"].ToString() + "; " +
+                                                                jObject["data"]["events"][0]["operationType"].ToString());
+                            tmpDict.Add("operationPlaceName", jObject["data"]["events"][0]["operationPlaceName"].ToString());
+                            tmpDict.Add("eventDateTime", jObject["data"]["events"][0]["eventDateTime"].ToString());
+                            tmpDict.Add("itemWeight", jObject["data"]["events"][0]["itemWeight"].ToString());
+                        }
+                        else
+                        {
+                            tmpDict.Add("operationAttribute",   jObject["data"]["lastPoint"]["operationAttribute"].ToString()+"; "+
+                                                                jObject["data"]["lastPoint"]["operationType"].ToString());
+                            tmpDict.Add("operationPlaceName", jObject["data"]["lastPoint"]["operationPlaceName"].ToString());
+                            tmpDict.Add("eventDateTime", jObject["data"]["lastPoint"]["eventDateTime"].ToString());
+                            tmpDict.Add("itemWeight", jObject["data"]["lastPoint"]["itemWeight"].ToString());
+                        }
                         tmpDict.Add("destinationCountry", jObject["data"]["destinationCountry"].ToString());
                         tmpDict.Add("trackCodeModified", jObject["data"]["trackCodeModified"].ToString());
                         tmpDict.Add("trackDeliveredDateTime", jObject["data"]["trackDeliveredDateTime"].ToString());
-                        tmpDict.Add("itemWeight", jObject["data"]["lastPoint"]["itemWeight"].ToString());
                         tmpDict.Add("groupedCompanyNames", jObject["data"]["groupedCompanyNames"][0].ToString());
 
                         if (!TrackCodeInfoDictionary.ContainsKey(TrackCode)) TrackCodeInfoDictionary.Add(TrackCode, new Dictionary<string, string>());

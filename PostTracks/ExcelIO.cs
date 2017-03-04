@@ -52,7 +52,9 @@ namespace PostTracks
                     //range.Select();
                     foreach (var ws in range)
                     {
-                        LoadedTracks.Add(((Excel.Range)ws).Value.ToString());
+                        string Track = ((Excel.Range)ws).Value.ToString();
+                        Track = Track.Trim().ToUpper();
+                        LoadedTracks.Add(Track);
                     }
                 }
             }

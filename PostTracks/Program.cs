@@ -17,6 +17,7 @@ namespace PostTracks
             ExcelIO ex;
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            //Application.Run(new frmLoading());
             Application.Run(new Form1());
             
         }

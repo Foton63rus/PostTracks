@@ -79,9 +79,9 @@ namespace PostTracks
                             tmpDict.Add("eventDateTime", jObject["data"]["lastPoint"]["eventDateTime"].ToString());
                             tmpDict.Add("itemWeight", jObject["data"]["lastPoint"]["itemWeight"].ToString());
                         }
-                        tmpDict.Add("destinationCountry", jObject["data"]["destinationCountry"].ToString());
-                        tmpDict.Add("trackCodeModified", jObject["data"]["trackCodeModified"].ToString());
-                        tmpDict.Add("trackDeliveredDateTime", jObject["data"]["trackDeliveredDateTime"].ToString());
+                        //tmpDict.Add("destinationCountry", jObject["data"]["destinationCountry"].ToString());
+                        //tmpDict.Add("trackCodeModified", jObject["data"]["trackCodeModified"].ToString());
+                        //tmpDict.Add("trackDeliveredDateTime", jObject["data"]["trackDeliveredDateTime"].ToString());
                         tmpDict.Add("groupedCompanyNames", jObject["data"]["groupedCompanyNames"][0].ToString());
 
                         if (!TrackCodeInfoDictionary.ContainsKey(TrackCode)) TrackCodeInfoDictionary.Add(TrackCode, new Dictionary<string, string>());

@@ -77,11 +77,11 @@ namespace PostTracks
                 ExcelWB.Sheets["Track24"].Cells[i + 1, 3].Value = tmpDict[key]["operationAttribute"];
                 ExcelWB.Sheets["Track24"].Cells[i + 1, 4].Value = tmpDict[key]["operationPlaceName"];
                 ExcelWB.Sheets["Track24"].Cells[i + 1, 5].Value = tmpDict[key]["eventDateTime"];
-                ExcelWB.Sheets["Track24"].Cells[i + 1, 6].Value = tmpDict[key]["destinationCountry"];
-                ExcelWB.Sheets["Track24"].Cells[i + 1, 7].Value = tmpDict[key]["trackCodeModified"];
-                ExcelWB.Sheets["Track24"].Cells[i + 1, 8].Value = tmpDict[key]["trackDeliveredDateTime"];
-                ExcelWB.Sheets["Track24"].Cells[i + 1, 9].Value = tmpDict[key]["itemWeight"];
-                ExcelWB.Sheets["Track24"].Cells[i + 1, 10].Value = tmpDict[key]["groupedCompanyNames"];
+                //ExcelWB.Sheets["Track24"].Cells[i + 1, 6].Value = tmpDict[key]["destinationCountry"];
+                //ExcelWB.Sheets["Track24"].Cells[i + 1, 7].Value = tmpDict[key]["trackCodeModified"];
+                //ExcelWB.Sheets["Track24"].Cells[i + 1, 8].Value = tmpDict[key]["trackDeliveredDateTime"];
+                ExcelWB.Sheets["Track24"].Cells[i + 1, 6].Value = tmpDict[key]["itemWeight"];
+                ExcelWB.Sheets["Track24"].Cells[i + 1, 7].Value = tmpDict[key]["groupedCompanyNames"];
             }
             ExcelApp.Visible = true;
         }

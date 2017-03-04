@@ -26,7 +26,6 @@ namespace PostTracks
             //excel = ExcelIO.getInstance();
             
         }
-
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             Tracker_track24.getSingleTrackInfo(textBox1.Text);

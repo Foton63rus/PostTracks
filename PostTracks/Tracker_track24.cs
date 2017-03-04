@@ -57,9 +57,11 @@ namespace PostTracks
                             jsonResponses.Add(TrackCode, json);
                         }
 
-                        //сохраняем json чисто для лога (в последствии можно будет стереть)
-                        System.IO.File.WriteAllText(System.IO.Directory.GetCurrentDirectory()+@"\json\"+ TrackCode.ToString()+ ".json", json);
-
+                        //сохраняем json чисто для лога ( коммандная строка "+json" )
+                        if (Params.JSON_SAVING)
+                        {
+                            System.IO.File.WriteAllText(System.IO.Directory.GetCurrentDirectory() + @"\json\" + TrackCode.ToString() + ".json", json);
+                        }
                         //parsing
                         JObject jObject = JObject.Parse(json);
                         Dictionary<string, string> tmpDict = new Dictionary<string, string>();

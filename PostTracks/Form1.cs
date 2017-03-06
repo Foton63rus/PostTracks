@@ -19,12 +19,12 @@ namespace PostTracks
             //https://www.aftership.com/docs/api/4/overview
             // TRACK24
             //'error' : 'TooManyRequests' 
-
+            frmLoading loading_frame = new frmLoading();
+            loading_frame.Show();
             InitializeComponent();
-
             //Tracker_track24.getSingleTrackInfo("RB166350968SG"); //"RF499423428CN"
             //excel = ExcelIO.getInstance();
-            
+
         }
         private void textBox1_TextChanged(object sender, EventArgs e)
         {

@@ -19,7 +19,6 @@ namespace PostTracks
             ExcelIO ex;
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new frmLoading());
             Application.Run(new Form1());
             
         }
@@ -33,8 +32,15 @@ namespace PostTracks
             {
                 if (arg == "+json") { boolArgs["json"] = true; }
             }
+            boolArgs.Add("BOOL_TRACKLIST_LOADED", false);
         }
-        static Dictionary<string, bool> boolArgs = new Dictionary<string, bool>() { };
+        internal static Dictionary<string, bool> boolArgs = new Dictionary<string, bool>() { };
+        static Dictionary<string, int> intArgs = new Dictionary<string, int>() { };
+        /// <summary>
+        /// Параметр отвечающий за необходимость сохранения json ответов от треккодов
+        /// в отдельную папку
+        /// <value>bool</value>
+        /// </summary>
         public static bool JSON_SAVING
         {
             get
@@ -42,5 +48,17 @@ namespace PostTracks
                 return boolArgs["json"];
             }
         }
-    }
+        /// <summary>
+        /// Переменная для окна загрузка
+        /// true - окно закроется
+        /// <value>bool</value>
+        /// </summary>
+        public static bool BOOL_TRACKLIST_LOADED
+        {
+            get
+            {
+                return boolArgs["BOOL_TRACKLIST_LOADED"];
+            }
+        }
+    }// Class Params
 }

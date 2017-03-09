@@ -14,21 +14,15 @@ namespace PostTracks
     public partial class MainForm : Form
     {
         ExcelIO xl = ExcelIO.getInstance();
+        frmWebFormAliDataGrabber frmAliDataGrabber;
+        frmLoading loading_frame;
         public MainForm()
         {
             //https://www.aftership.com/docs/api/4/overview
             // TRACK24
             //'error' : 'TooManyRequests' 
-            frmLoading loading_frame = new frmLoading();
-            loading_frame.Show();
             InitializeComponent();
             //Tracker_track24.getSingleTrackInfo("RB166350968SG"); //"RF499423428CN"
-            //excel = ExcelIO.getInstance();
-
-        }
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            //DisplayTrackInformation();
         }
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
@@ -38,7 +32,7 @@ namespace PostTracks
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            loadTrackListInfo(xl);
+            //loadTrackListInfo(xl);
         }
         private void loadTrackListInfo(ExcelIO _excel)
         {
@@ -46,14 +40,9 @@ namespace PostTracks
             _excel.track24dataToExcel();
         }
 
-        private void ordersToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void btn_web_Click(object sender, EventArgs e)
         {
-            throw new ConstraintException();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            DisplayTrackInformation();
+            //openAliDataGrabberFrame();
         }
         /// <summary>
         /// Вывод информации на richTextBox rtb_TrackInformation на вкладке Track_JSON главного окна
@@ -82,6 +71,33 @@ namespace PostTracks
                 TrackCodeInfoDictionary[track]["groupedCompanyNames"]
             );
             rtb_TrackInformation.Text = Text + Tracker_track24.getTrackJSON(tb_TrackCode.Text);
+        }
+        /// <summary>
+        /// Открывает окно загрузки на время прогрузки екселя
+        /// </summary>
+        private void openLoadingFrame()
+        {
+            loading_frame = new frmLoading();
+            loading_frame.Show();
+        }
+        /// <summary>
+        /// Opening Ali Track Codes numbers grabber Frame
+        /// </summary>
+        private void openAliDataGrabberFrame()
+        {
+            frmAliDataGrabber = new frmWebFormAliDataGrabber();
+            frmAliDataGrabber?.Show();
+        }
+
+        private void btnTrackInfo_Click(object sender, EventArgs e)
+        {
+            openLoadingFrame();
+            loadTrackListInfo(xl);
+        }
+
+        private void btn_TrackJSONInformation_Click(object sender, EventArgs e)
+        {
+            DisplayTrackInformation();
         }
     }
 }

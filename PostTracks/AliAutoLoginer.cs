@@ -25,6 +25,7 @@ namespace PostTracks
         public AliAutoLoginer()
         {
             if (WB == null) WB = new OpenQA.Selenium.Chrome.ChromeDriver();
+            WB.Manage().Window.Maximize();
         }
         ~AliAutoLoginer()
         {

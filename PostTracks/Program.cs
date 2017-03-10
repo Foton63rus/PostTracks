@@ -8,7 +8,6 @@ namespace PostTracks
 {
     static class Program
     {
-
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -16,11 +15,9 @@ namespace PostTracks
         static void Main(string[] args)
         {
             Params.initParams(args);
-            ExcelIO ex;
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());
-            
         }
     }
     static class Params
@@ -41,24 +38,12 @@ namespace PostTracks
         /// в отдельную папку
         /// <value>bool</value>
         /// </summary>
-        public static bool JSON_SAVING
-        {
-            get
-            {
-                return boolArgs["json"];
-            }
-        }
+        public static bool JSON_SAVING => boolArgs["json"];
         /// <summary>
         /// Переменная для окна загрузка
         /// true - окно закроется
         /// <value>bool</value>
         /// </summary>
-        public static bool BOOL_TRACKLIST_LOADED
-        {
-            get
-            {
-                return boolArgs["BOOL_TRACKLIST_LOADED"];
-            }
-        }
+        public static bool BOOL_TRACKLIST_LOADED => boolArgs["BOOL_TRACKLIST_LOADED"];
     }// Class Params
 }

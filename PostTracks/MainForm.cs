@@ -14,7 +14,7 @@ namespace PostTracks
     public partial class MainForm : Form
     {
         ExcelIO xl = ExcelIO.getInstance();
-        frmWebFormAliDataGrabber frmAliDataGrabber;
+        AliAutoLoginer myAliAutoLoger;
         frmLoading loading_frame;
         public MainForm()
         {
@@ -28,6 +28,7 @@ namespace PostTracks
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
             if(xl != null) { xl.ExcelAppQuit(); }
+            myAliAutoLoger.Quit();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -42,7 +43,8 @@ namespace PostTracks
 
         private void btn_web_Click(object sender, EventArgs e)
         {
-            //openAliDataGrabberFrame();
+            if(myAliAutoLoger == null) myAliAutoLoger = new AliAutoLoginer();
+            myAliAutoLoger.login("Trve.man.rom.5@scryptmail.com", "1qazQAZ");
         }
         /// <summary>
         /// Вывод информации на richTextBox rtb_TrackInformation на вкладке Track_JSON главного окна
@@ -83,12 +85,6 @@ namespace PostTracks
         /// <summary>
         /// Opening Ali Track Codes numbers grabber Frame
         /// </summary>
-        private void openAliDataGrabberFrame()
-        {
-            frmAliDataGrabber = new frmWebFormAliDataGrabber();
-            frmAliDataGrabber?.Show();
-        }
-
         private void btnTrackInfo_Click(object sender, EventArgs e)
         {
             openLoadingFrame();

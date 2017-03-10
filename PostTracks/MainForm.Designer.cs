@@ -58,7 +58,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.rtb_TrackInformation.Location = new System.Drawing.Point(6, 40);
             this.rtb_TrackInformation.Name = "rtb_TrackInformation";
-            this.rtb_TrackInformation.Size = new System.Drawing.Size(317, 365);
+            this.rtb_TrackInformation.Size = new System.Drawing.Size(317, 393);
             this.rtb_TrackInformation.TabIndex = 1;
             this.rtb_TrackInformation.Text = "";
             // 
@@ -146,7 +146,7 @@
             this.btn_web.Name = "btn_web";
             this.btn_web.Size = new System.Drawing.Size(75, 23);
             this.btn_web.TabIndex = 0;
-            this.btn_web.Text = "???";
+            this.btn_web.Text = "AliExpress";
             this.btn_web.UseVisualStyleBackColor = true;
             this.btn_web.Click += new System.EventHandler(this.btn_web_Click);
             // 

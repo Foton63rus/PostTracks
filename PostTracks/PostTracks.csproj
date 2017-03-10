@@ -68,16 +68,14 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="WebDriver, Version=3.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libs\WebDriver.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AliLoger.cs" />
+    <Compile Include="AliAutoLoginer.cs" />
     <Compile Include="ExcelIO.cs" />
-    <Compile Include="frmWebFormAliDataGrabber.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmWebFormAliDataGrabber.Designer.cs">
-      <DependentUpon>frmWebFormAliDataGrabber.cs</DependentUpon>
-    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -94,9 +92,6 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tracker_track24.cs" />
-    <EmbeddedResource Include="frmWebFormAliDataGrabber.resx">
-      <DependentUpon>frmWebFormAliDataGrabber.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -146,11 +141,14 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="chromedriver.exe" />
     <Content Include="Libs\info.txt" />
     <Content Include="Libs\Microsoft.Office.Interop.Excel.dll" />
     <Content Include="Libs\Newtonsoft.Json.dll" />
+    <Content Include="Libs\WebDriver.dll" />
     <Content Include="src\ico\Ali.ico" />
     <Content Include="src\ico\TrackCode.ico" />
+    <Content Include="WebDriver.dll" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

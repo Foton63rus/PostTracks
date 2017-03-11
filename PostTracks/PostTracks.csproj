@@ -141,7 +141,6 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="chromedriver.exe" />
     <Content Include="Libs\info.txt" />
     <Content Include="Libs\Microsoft.Office.Interop.Excel.dll" />
     <Content Include="Libs\Newtonsoft.Json.dll" />

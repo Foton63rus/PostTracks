@@ -11,7 +11,7 @@ namespace PostTracks
     public sealed class ExcelIO //Singleton
     {
         //IPostTrackInfo
-        private ExcelIO() { loadWorkBook("");  }
+        private ExcelIO() { loadWorkBook();  }
         private static ExcelIO instance = new ExcelIO();
         public static ExcelIO getInstance()
         {
@@ -24,18 +24,11 @@ namespace PostTracks
         List<string> str_CurrentTrackInfo = new List<string>();
         string path { get; set; }
         public List<string> LoadedTracks = new List<string>();
-        private void loadWorkBook(string str_path)
+        private void loadWorkBook()
         {
-            if (str_path == "" || String.IsNullOrEmpty(str_path))
-            {
-                path = System.IO.Directory.GetCurrentDirectory() + @"\Tracks.xlsx";
-            }
-            else
-            {
-                path = str_path;
-            }
             try
             {
+                path = System.IO.Directory.GetCurrentDirectory() + @"\Tracks.xlsx";
                 ExcelApp = new Excel.Application();
                 ExcelWB = ExcelApp.Workbooks.Open(path, 0, true, 5, "", "", true, Microsoft.Office.Interop.Excel.XlPlatform.xlWindows, "\t", false, false, 0, true, 1, 0);
                 ExcelSheet = (Excel.Worksheet)ExcelWB.Sheets["Список"];
@@ -84,10 +77,6 @@ namespace PostTracks
         }
         public void ExcelAppQuit() {
             if (ExcelApp != null) ExcelApp.Quit();
-        }
-        public ExcelIO(string str_path)
-        {
-            loadWorkBook(str_path);
         }
     }
 }

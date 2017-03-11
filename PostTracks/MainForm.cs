@@ -22,29 +22,21 @@ namespace PostTracks
             // TRACK24
             //'error' : 'TooManyRequests' 
             InitializeComponent();
-            //Tracker_track24.getSingleTrackInfo("RB166350968SG"); //"RF499423428CN"
         }
-
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
             if(xl != null) { xl.ExcelAppQuit(); }
             myAliAutoLoger.Quit();
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            //loadTrackListInfo(xl);
         }
         private void loadTrackListInfo(ExcelIO _excel)
         {
             Tracker_track24.getManyTrackInfo(_excel.LoadedTracks);
             _excel.track24dataToExcel();
         }
-
         private void btn_web_Click(object sender, EventArgs e)
         {
             if(myAliAutoLoger == null) myAliAutoLoger = new AliAutoLoginer();
-            myAliAutoLoger.login("Trve.man.rom.5@scryptmail.com", "1qazQAZ");
+            //myAliAutoLoger.login("login", "pass");
         }
         /// <summary>
         /// Вывод информации на richTextBox rtb_TrackInformation на вкладке Track_JSON главного окна
@@ -90,7 +82,6 @@ namespace PostTracks
             openLoadingFrame();
             loadTrackListInfo(xl);
         }
-
         private void btn_TrackJSONInformation_Click(object sender, EventArgs e)
         {
             DisplayTrackInformation();

@@ -62,6 +62,7 @@ namespace PostTracks
         /// Тут будет поочередный запуск всех пар логин/пароль
         /// </summary>
         /// <param name="KeyPassPair"></param>
+        // TODO Сделать реализацию перебора всех комбинаций логин/пароль.
         public void Logins(Dictionary<string, string> KeyPassPair)
         {
             List<string> logs = KeyPassPair.Keys.ToList<string>();

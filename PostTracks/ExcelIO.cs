@@ -33,15 +33,15 @@ namespace PostTracks
                 ExcelWB = ExcelApp.Workbooks.Open(path, 0, true, 5, "", "", true, Microsoft.Office.Interop.Excel.XlPlatform.xlWindows, "\t", false, false, 0, true, 1, 0);
                 ExcelSheet = (Excel.Worksheet)ExcelWB.Sheets["Список"];
                 // можно будет сделать автоопределение столбца с треками по названию колонки
-                range = ExcelSheet.Range["O2"];
+                range = ExcelSheet.Range["B2"];
                 if (String.IsNullOrEmpty(range.Value) || String.IsNullOrWhiteSpace(range.Value))
                 {
-                    range = ExcelSheet.Range["O2"]; // пустая ячейка
+                    range = ExcelSheet.Range["B2"]; // пустая ячейка
                 }
                 else
                 {
                     int i = range.End[Microsoft.Office.Interop.Excel.XlDirection.xlDown].Row;
-                    range = ExcelSheet.Range["O2:O" + i.ToString()];
+                    range = ExcelSheet.Range["B2:B" + i.ToString()];
                     //range.Select();
                     foreach (var ws in range)
                     {

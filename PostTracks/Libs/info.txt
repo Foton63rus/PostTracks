@@ -8,5 +8,9 @@ https://www.microsoft.com/en-us/download/details.aspx?id=3508 (ссылка на
 http://www.newtonsoft.com/json
 https://github.com/JamesNK/Newtonsoft.Json
 
-3. Надо добавить логи
+3. Selenium WebDriver
+http://www.seleniumhq.org/projects/webdriver/
+
+
+Надо добавить логи
 https://github.com/NLog

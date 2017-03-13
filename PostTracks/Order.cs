@@ -12,7 +12,7 @@ namespace PostTracks
         private DateTime _order_date;
         private string _store_name;
         private double _order_amount;
-        private List<Product> _products;
+        private List<Product> _products = new List<Product>();
         public int ProductCount => _products.Count();
         public string OrderId
         {
@@ -60,9 +60,9 @@ namespace PostTracks
         }
         public void addProduct(Product product)
         {
-            if (!_products.Contains( product ))
+            if (!_products.Contains(product))
             {
-                _products.Add( product );
+                _products.Add(product);
             }
         }
         public Product this[int i]
@@ -87,26 +87,19 @@ namespace PostTracks
                 addProduct(product);
             }
         }
-    }//class Order
-
-    internal class Product
-    {
-        private string _trackcode;
-        public string Trackcode
+        public override string ToString()
         {
-            get
+            string ProductListString = "";
+            foreach (Product product in _products)
             {
-                return _trackcode;
+                ProductListString += String.Format("({0})", product);
             }
-            set
-            {
-                _trackcode = value;
-            }
+            return String.Format("[Order:{0}, {1}, Store:\"{2}\", Amount:{3}, Products:{4}]",
+                OrderId,
+                OrderDate,
+                StoreName,
+                OrderAmount,
+                ProductListString);
         }
-        private string _name;
-        private double _product_amount;
-        private int _product_count;
-        private string _product_action;
-        private string _product_properties;
-    }//class Product
+    }//class Order
 }

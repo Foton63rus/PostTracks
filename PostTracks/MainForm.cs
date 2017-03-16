@@ -13,7 +13,7 @@ namespace PostTracks
 {
     public partial class MainForm : Form
     {
-        ExcelIO xl = ExcelIO.getInstance();
+        //ExcelIO xl = ExcelIO.getInstance();
         AliAutoLoginer myAliAutoLoger;
         frmLoading loading_frame;
         public MainForm()
@@ -25,13 +25,13 @@ namespace PostTracks
         }
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if(xl != null) { xl.ExcelAppQuit(); }
+            Excel.ExcelHelper.ExcelAppQuit();
             myAliAutoLoger.Quit();
         }
-        private void loadTrackListInfo(ExcelIO _excel)
+        private void loadTrackListInfo()
         {
-            Tracker_track24.getManyTrackInfo(_excel.LoadedTracks);
-            _excel.track24dataToExcel();
+            Tracker_track24.getManyTrackInfo(Excel.ExcelHelper.getTrackNumsList());
+            new Excel.Track24Writer().write();
         }
         private void btn_web_Click(object sender, EventArgs e)
         {
@@ -80,7 +80,7 @@ namespace PostTracks
         private void btnTrackInfo_Click(object sender, EventArgs e)
         {
             openLoadingFrame();
-            loadTrackListInfo(xl);
+            loadTrackListInfo();
         }
         private void btn_TrackJSONInformation_Click(object sender, EventArgs e)
         {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PostTracks
 {
-    internal class Product
+    internal class ProductClass
     {
         private string _trackcode;
         public string Trackcode
@@ -81,7 +81,7 @@ namespace PostTracks
             }
         }
 
-        public Product(
+        public ProductClass(
             string trackcode,
             string name,
             double product_amount,

@@ -22,6 +22,19 @@ namespace PostTracks
     }
     static class Params
     {
+        private static string _XLFilePath = System.IO.Directory.GetCurrentDirectory() + @"\Tracks.xlsx";
+        public static string XLFilePath
+        {
+            get
+            {
+                return _XLFilePath;
+            }
+            set
+            {
+                _XLFilePath = value;
+            }
+        }
+        public static readonly string XL_Tab_TrackList = "Список";
         internal static void initParams(string[] args)
         {
             boolArgs.Add("json", false);

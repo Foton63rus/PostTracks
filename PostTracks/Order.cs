@@ -12,7 +12,7 @@ namespace PostTracks
         private DateTime _order_date;
         private string _store_name;
         private double _order_amount;
-        private List<Product> _products = new List<Product>();
+        private List<ProductClass> _products = new List<ProductClass>();
         public int ProductCount => _products.Count();
         public string OrderId
         {
@@ -58,14 +58,14 @@ namespace PostTracks
                 _order_amount = value;
             }
         }
-        public void addProduct(Product product)
+        public void addProduct(ProductClass product)
         {
             if (!_products.Contains(product))
             {
                 _products.Add(product);
             }
         }
-        public Product this[int i]
+        public ProductClass this[int i]
         {
             get
             {
@@ -76,13 +76,13 @@ namespace PostTracks
                 _products[i] = value;
             }
         }
-        public Order(string order_id, DateTime order_date, string store_name, double order_amount, params Product[] products)
+        public Order(string order_id, DateTime order_date, string store_name, double order_amount, params ProductClass[] products)
         {
             OrderId = order_id;
             OrderDate = order_date;
             StoreName = store_name;
             OrderAmount = order_amount;
-            foreach (Product product in products)
+            foreach (ProductClass product in products)
             {
                 addProduct(product);
             }
@@ -90,7 +90,7 @@ namespace PostTracks
         public override string ToString()
         {
             string ProductListString = "";
-            foreach (Product product in _products)
+            foreach (ProductClass product in _products)
             {
                 ProductListString += String.Format("({0})", product);
             }
